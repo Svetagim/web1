@@ -1,14 +1,11 @@
-
 *{
     padding: 0px;
     margin: 0px;
     font-family: Arial,sans-serif;
 }
-a{
-    text-decoration: none;
-    display: block;
-    width: 230px;
-}
+
+header, a, nav,aside, article, section, footer, main{display: block;}
+
 #wrapper{
     margin: 0px auto;
     width: auto;
@@ -16,8 +13,19 @@ a{
     height: 1000px;
 }
 
+a {text-decoration: none;}
+
+.clear{clear: both;}
+
+.userName{
+    float: left;
+}
+
+/*------index page----------------------------------------------*/
+
 #index_page h1{
     margin-top: 30px;
+    font-size: 30px;
     float: left;
     width: 200px;
     color: #000000;
@@ -44,11 +52,21 @@ a{
     left: 650px;
     top: 200px;
 }
+
+/*------main page-----------------------------------------*/
+
+#main_page #logo{
+    background-image: url("../images/small_logo.png");
+    background-repeat: no-repeat;
+    width: 250px;
+    height: 200px;
+    float: right;
+}
+
 #main_page .groups{
     margin-left: 15%;
 }
-#main_page .groups section{
-    display: block;
+#main_page .groups a{
     height: 200px;
     width: 200px;
     float: left;
@@ -70,5 +88,26 @@ a{
     background-repeat: no-repeat;
 }
 
+#main_page a p{
+    position: absolute;
+    bottom: 50px;
+    right:250px;
+}
+
 #main_page .groups{
+    position: absolute;
+    top: 300px;
+    left:150px;
+}
+
+/*-------*/
+#babies_page .babies a{
+    float: right;
+}
+#babies_page .babies a img{
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin: 25px;
+    border: 5px solid #acacac;
 }
