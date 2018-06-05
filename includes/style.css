@@ -100,14 +100,32 @@ a {text-decoration: none;}
     left:150px;
 }
 
-/*-------*/
-#babies_page .babies a{
+/*------groups---------*/
+#groups_page .kids a{
     float: right;
 }
-#babies_page .babies a img{
+#groups_page .kids a img{
     border-radius: 50%;
     height: 150px;
     width: 150px;
     margin: 25px;
     border: 5px solid #acacac;
+}
+
+#groups_page .kids a img.warning_msg{
+    border: 5px solid #ea1111;
+}
+#groups_page .kids a img p{
+    display: block;
+    width: 50px;
+    margin-left: 60px;
+}
+
+/*--------kids---------*/
+
+#kids_page img{
+    border-radius: 50%;
+    height: 300px;
+    width: 300px;
+    float: right;
 }
