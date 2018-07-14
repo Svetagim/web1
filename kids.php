@@ -138,7 +138,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">ביטול</button>
-            <input type="submit" class="btn btn-success" value="שלח\י תזכורת">
+            <input type="submit" class="btn btn-success" value="אישור">
           </div>
         </form>
     </div>
