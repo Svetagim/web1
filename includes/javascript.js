@@ -34,8 +34,3 @@ window.onload=function(){
 
 }*/
 
-$(document).ready(function() {
-    $.getJSON("data/groups.json", function(data) {
-        console.log(data);
-    });
-});
