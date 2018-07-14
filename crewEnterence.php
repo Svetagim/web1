@@ -60,13 +60,13 @@
     <main>
          <div class="card-deck" id="groups-list">
          </div>
-                <a href="#">
+                <a href="#" id="show_all_kids">
                     <section id="continue">
                         <h3>כל הילדים</h3>
                         <i class="fas fa-arrow-circle-down"></i>
                     </section>
                 </a>
-        <section class="kids">
+        <section class="kids" id="kids_section">
             <?php
                     $query = "SELECT * FROM Childrens_213";
                     $result = mysqli_query($connection, $query);
@@ -82,7 +82,6 @@
                             while($row = mysqli_fetch_assoc($result)) {
                                 echo '<a href="kids.php?Child_ID=' . $row["Child_ID"] . '&Cname=' . $row["FirstName"] . '"><img src="' . $row["pic"] . '"><h5>' . $row["FirstName"] . '</h5></a>';
                             }
-                            echo '<a href="#"><img src="images/PlusIcon_Small_Gray.png"></a>';
                         }
                     }
                     //Release returned data
@@ -100,6 +99,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <script src="includes/javascript.js"></script>
+    
+    <script>
+        $('#show_all_kids').click(function() {
+            $("#kids_section").css("display","block");
+        });
+    </script>
 
 </body>
 </html>

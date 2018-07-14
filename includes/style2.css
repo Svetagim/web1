@@ -192,7 +192,9 @@ section .fa-arrow-circle-down {
      margin: 0 45%;
 }
 
-
+#kids_page #kids_section {
+    display: none;
+}
 #kids_page .kids a{
     float: right;
 }
