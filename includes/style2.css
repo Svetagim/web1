@@ -188,10 +188,15 @@ a {text-decoration: none;}
     color: darkgreen;
     width: 30px;
 }
+
 #index_page #menu{
-    position: absolute;
-    top: 240px;
-    left: 230px;
+    display: block;
+    width: 250px;
+    height: 200px;
+    float: right;
+    position: relative;
+    top: 220px;
+    right: 20%;
 }
 
  #logo{
@@ -210,9 +215,10 @@ a {text-decoration: none;}
     display: block;
     width: 534px;
     height: 254px;
-    position: absolute;
-    left: 650px;
+    position: relative;
+    float: right;
     top: 200px;
+    right: 10%;
 }
 
 input {
