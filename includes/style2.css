@@ -236,3 +236,15 @@ label.form-check-label{
     width: 380px;
     text-align: right;
 }
+
+#treatment_box .modal-header {
+    direction: rtl;
+}
+
+#treatment_box .modal-footer {
+    margin-right:54%;
+}
+
+#treatment_box .modal-footer button {
+    margin-right: 10px;
+}

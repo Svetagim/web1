@@ -90,10 +90,17 @@
                                               </div>
                                               <div class="card-body">
                                                 <h5 class="card-title"><b>' . $row["FirstName"] . '</b></h5>
-                                                <p class="card-text">אנא בחר\י אפשרות</p>
+                                                <p class="card-text">
+                                                    יש לטפל: 
+                                                    <span id="reminder">';
+                                                if($row["Reminder"] == NULL) {echo 'אין';} else { echo $row["Reminder"]; }
+                                        echo '      </span>
+                                                <br>
+                                                אנא בחר\י אפשרות
+                                                </p>
                                                 <a href="#" class="btn btn-success">פרטים אישיים</a>
                                                   <a href="#" class="btn btn-success">חוזים ותשלומים</a>
-                                                  <a href="#" class="btn btn-danger" id="toExecute">לטיפול</a>
+                                                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#treatment_box">לטיפול</button>
                                               </div>
                                             </div>';
                                     }
@@ -107,62 +114,66 @@
                         }
                         else
                         {
-                            echo "Sorry. Something went wrong :(";
+                            echo "<script>alert('Sorry. Something went wrong :( ');</script>";
                         }
                     ?>
-        <div class="card-deck" id="messageAlert">
-            <div class="card">
-                <form action="#" method="get" autocomplete ="on">
-                    <h5>לטיפול</h5>
-                    <p>המערכת זיהתה כי טרם הוזנה פעילות זחילה. זחילה לראשונה אמורה להתבצע בגילאי 7-9 חודשים. מומלץ לעדכן את ההורים ולהמשיך לעקוב</p>
-                    <p>מה ברצונך לעשות?</p>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="parents1" value="להודיע להורים" checked>
-                        <label class="form-check-label">
-                            להודיע להורים
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="continue" value="להמשיך לעקוב">
-                        <label class="form-check-label">
-                            להמשיך לעקוב
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="close" value="לסגור טיפול ללא הודעה">
-                        <label class="form-check-label">
-                            לסגור טיפול ללא הודעה
-                        </label>
-                    </div>
-                    <input type="submit" value="אישור"  id="btnSubmitFirstPart" class="submitCancelButtons">
-                    <input type="button" value="ביטול" id="cancel1" class="submitCancelButtons">
-                </form>
-                </div>
-            </div>
-
-
-
-        <div class="card-deck" id="messageInput">
-            <div class="card">
-                <form action="#" method="get" autocomplete ="on">
-                    <h5>הודעה להורים</h5><br>
-                    <textarea class="form-control" name="address" rows="6"></textarea>
-                    <input type="submit" value="אישור"  id="btnSubmitSecondPart" class="submitCancelButtons">
-                    <input type="button" value="ביטול" id="cancel2" class="submitCancelButtons">
-                </form>
-            </div>
-        </div>
-
-
-
-    </main>
+                
+<!-- Treatment box -->
+<!-- Modal -->
+<div class="modal fade" id="treatment_box" tabindex="-1" role="dialog" aria-labelledby="treatment_box" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="treatment_boxTitle">נושאים לטיפול</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form action="" method="post" autocomplete ="on" id="reminder_form">
+          <div class="modal-body" id="modal-body">
+            <p>המערכת זיהתה כי טרם הוזנה פעילות זחילה. זחילה לראשונה אמורה להתבצע בגילאי 7-9 חודשים. מומלץ לעדכן את ההורים ולהמשיך לעקוב</p>
+            <p>?מה ברצונך לעשות</p>
+            <!-- Here enters json data from reminders.json -->
+              <input type="hidden" value="<?php echo $_GET['Child_ID']; ?>" name="child_id" id="child_id">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">ביטול</button>
+            <input type="submit" class="btn btn-success" value="שלח\י תזכורת">
+          </div>
+        </form>
+    </div>
+  </div>
 </div>
+<!-- END Treatment box -->
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
 <script src="includes/javascript.js"></script>
+
+        <script>
+            $(function() {
+                $("#reminder_form").submit(function() {
+                    var txt = $("input:radio[name='reminder']:checked").val();
+                    var child_id = $("#child_id").val();
+                    var dataString = 'child_id=' + child_id + '&reminder=' + txt;
+                    
+                    console.log(dataString);
+                    $.ajax({
+                        type: "POST",
+                        url: "database/action.php",
+                        data: dataString,
+                        cache: true,
+                        success: function(html){
+                            $('#reminder').html(txt);
+                            $('#treatment_box').modal('hide');
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
 
 </body>
 </html>
