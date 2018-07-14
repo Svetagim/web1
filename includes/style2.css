@@ -120,6 +120,10 @@ section .fa-arrow-circle-down {
      font-weight: bold;
 }
 
+ #groups_page .kids #center_plus{
+     margin: 0 45%;
+}
+
 a {text-decoration: none;}
 
 #messageAlert{

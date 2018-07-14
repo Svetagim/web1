@@ -1,3 +1,6 @@
+<?php
+    include('database/db_conf.php');
+?>
 <!DOCTYPE html>
 <html lang="he">
 <head>
@@ -53,23 +56,60 @@
         <nav aria-label="breadcrumb" dir="rtl">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="crewEnterence.html">ילדי וקבוצות הגן</a></li>
-                <li class="breadcrumb-item"><a href="groups.html">תינוקיה</a></li>
-                <li class="breadcrumb-item active" aria-current="page">ליב</li>
-            </ol>
-        </nav>
-            <div class="card text-center">
-              <div class="card-header">
-                <img src="images/baby3.png">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"><b>ליב</b></h5>
-                <p class="card-text">אנא בחר\י אפשרות</p>
-                <a href="#" class="btn btn-success">פרטים אישיים</a>
-                  <a href="#" class="btn btn-success">חוזים ותשלומים</a>
-                  <a href="#" class="btn btn-danger" id="toExecute">לטיפול</a>
-              </div>
-            </div>
+                
+                    <?php
+                        if(isset($_GET['Child_ID']))
+                        {
+                            $Child_ID = mysqli_real_escape_string($connection, $_GET['Child_ID']);
+                            $Child_Name = mysqli_real_escape_string($connection, $_GET['Cname']);
+                            $query = "SELECT * FROM Childrens_213 WHERE Child_ID=" . $Child_ID . " LIMIT 1;";
+                            $result = mysqli_query($connection, $query);
+                            if(!$result) {
+                                die("DB query: " + $query + " - failed.");
+                            }
+                            else{
+                                if(mysqli_num_rows($result) < 1){
+                                    echo '<div class="alert alert-danger" role="alert">מספר מזהה לא נמצא</div>';
+                                }
+                                else{
+                                    $row = mysqli_fetch_assoc($result);
+                                    $query = "SELECT * FROM Groups_213 WHERE Group_ID=" . $row['Group_ID'] . " LIMIT 1;";
+                                    $result2 = mysqli_query($connection, $query);
+                                    if(!$result2) {
+                                        die("DB query: " + $query + " - failed.");
+                                    }
+                                    else{
+                                        $row2 = mysqli_fetch_assoc($result2);
+                                        echo '<li class="breadcrumb-item"><a href="groups.php?groupId=' . $row2["Group_ID"] . '&groupName=' . $row2["name"] . '">'
+                                            . $row2["name"] . '</a></li>';
+                                        echo '<li class="breadcrumb-item active" aria-current="page">' . $Child_Name . '</li>';
+                                        echo '</ol></nav>
+                                            <div class="card text-center">
+                                              <div class="card-header">
+                                                <img src="' . $row["pic"] . '">
+                                              </div>
+                                              <div class="card-body">
+                                                <h5 class="card-title"><b>' . $row["FirstName"] . '</b></h5>
+                                                <p class="card-text">אנא בחר\י אפשרות</p>
+                                                <a href="#" class="btn btn-success">פרטים אישיים</a>
+                                                  <a href="#" class="btn btn-success">חוזים ותשלומים</a>
+                                                  <a href="#" class="btn btn-danger" id="toExecute">לטיפול</a>
+                                              </div>
+                                            </div>';
+                                    }
+                                    //Release returned data
+                                    mysqli_free_result($result2);
 
+                                    //Close DB connection
+                                    mysqli_close($connection);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            echo "Sorry. Something went wrong :(";
+                        }
+                    ?>
         <div class="card-deck" id="messageAlert">
             <div class="card">
                 <form action="#" method="get" autocomplete ="on">

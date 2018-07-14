@@ -1,3 +1,7 @@
+<?php
+    include('database/db_conf.php');
+?>
+
 <!DOCTYPE html>
 <html lang="he">
 <head>
@@ -49,20 +53,43 @@
         <nav aria-label="breadcrumb" dir="rtl">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="crewEnterence.html">ילדי וקבוצות הגן</a></li>
-                <li class="breadcrumb-item active" aria-current="page">תינוקיה</li>
+                <li class="breadcrumb-item active" aria-current="page"><?php echo $_GET['groupName']?></li>
             </ol>
         </nav>
         <section class="kids">
-            <a href="#"><img src="images/baby1.png"><h5>אסף</h5></a>
-            <a href="#"><img src="images/baby2.png"><h5>תמר</h5></a>
-            <a href="kids.html"><img src="images/baby3.png" class="warning_msg"><h5>ליב</h5></a>
-            <a href="#"><img src="images/baby4.png"><h5>עמית</h5></a>
-            <a href="#"><img src="images/baby5.png"><h5>אבי</h5></a>
-            <a href="#"><img src="images/baby6.png"><h5>יונתן</h5></a>
-            <a href="#"><img src="images/baby7.png"><h5>חן</h5></a>
-            <a href="#"><img src="images/baby8.png"><h5>שירה</h5></a>
-            <a href="#"><img src="images/baby9.png"><h5>נור</h5></a>
-            <a href="#"><img src="images/PlusIcon_Small_Gray.png"></a>
+            <?php
+                if(isset($_GET['groupId']))
+                {
+                    $group_id = mysqli_real_escape_string($connection, $_GET['groupId']);
+                    $query = "SELECT * FROM Childrens_213 WHERE Group_ID=" . $group_id . " Order By Child_ID;";
+                    $result = mysqli_query($connection, $query);
+                    if(!$result) {
+                        die("DB query: " + $query + " - failed.");
+                    }
+                    else{
+                        if(mysqli_num_rows($result) < 1){
+                            echo '<div class="alert alert-warning" role="alert">קבוצה ריקה מילדים</div>';
+                            echo '<a href="#" id="center_plus"><img src="images/PlusIcon_Small_Gray.png"></a>';
+                        }
+                        else{
+                            while($row = mysqli_fetch_assoc($result)) {
+                                echo '<a href="kids.php?Child_ID=' . $row["Child_ID"] . '&Cname=' . $row["FirstName"] . '"><img src="' . $row["pic"] . '"><h5>' . $row["FirstName"] . '</h5></a>';
+                            }
+                            echo '<a href="#"><img src="images/PlusIcon_Small_Gray.png"></a>';
+                        }
+                    }
+                    //Release returned data
+                    mysqli_free_result($result);
+
+                    //Close DB connection
+                    mysqli_close($connection);
+                }
+                else
+                {
+                    echo "Sorry. Something went wrong :(";
+                }
+            ?>
+            
         </section>
 
     </main>
