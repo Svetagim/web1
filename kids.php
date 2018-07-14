@@ -98,6 +98,7 @@
                                                 <br>
                                                 אנא בחר\י אפשרות
                                                 </p>
+                                                <button type="button" class="btn btn-danger" id="deleteChild">מחק חשבון</button>
                                                 <a href="#" class="btn btn-success">פרטים אישיים</a>
                                                   <a href="#" class="btn btn-success">חוזים ותשלומים</a>
                                                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#treatment_box">לטיפול</button>
@@ -154,12 +155,25 @@
 
         <script>
             $(function() {
+                $("#deleteChild").click( function() {
+                    var child_id = $("#child_id").val();
+                    var dataString = 'child_id=' + child_id + '&toDelete=1';
+                    $.ajax({
+                        type: "POST",
+                        url: "database/action.php",
+                        data: dataString,
+                        cache: true,
+                        success: function(html){
+                            window.location = "crewEnterence.php";
+                        }
+                    });
+                    return false;
+                });
                 $("#reminder_form").submit(function() {
                     var txt = $("input:radio[name='reminder']:checked").val();
                     var child_id = $("#child_id").val();
                     var dataString = 'child_id=' + child_id + '&reminder=' + txt;
                     
-                    console.log(dataString);
                     $.ajax({
                         type: "POST",
                         url: "database/action.php",

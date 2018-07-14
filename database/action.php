@@ -11,6 +11,13 @@ if(isset($_POST['reminder']))
     mysqli_query($connection, $query1);
 }
 
+if($_POST['toDelete']==1)
+{
+    $child_id = mysqli_real_escape_string($connection, $_POST['child_id']);
+    $query1 = "DELETE FROM Childrens_213 where Child_ID=" . $child_id;
+    mysqli_query($connection, $query1);
+}
+
 //Close DB connection
 mysqli_close($connection);
 
