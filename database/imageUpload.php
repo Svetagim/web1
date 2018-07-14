@@ -18,12 +18,14 @@
         $city = mysqli_real_escape_string($connection, $_POST['city']);
         $bdate = mysqli_real_escape_string($connection, $_POST['bdate']);
         $group = mysqli_real_escape_string($connection, $_POST['group']);
-
-        $target = "images/"; 
+        
+        $target_for_db = "images/";
+        $target_for_db = $target_for_db . "baby" . $childId . ".png";
+        $target = "../images/"; 
         $target = $target . "baby" . $childId . ".png"; 
         $pic=($_FILES['pic']['name']);
 
-        $query1 = "INSERT INTO Childrens_213 (Child_ID,FirstName,LastName,Address,City,BirthDate,pic,Group_ID) values (" . $childId . ",'" . $fname . "','" . $lname . "','" . $address . "','" . $city . "','" . $bdate . "','" . $target . "','" . $group . "')";
+        $query1 = "INSERT INTO Childrens_213 (Child_ID,FirstName,LastName,Address,City,BirthDate,pic,Group_ID) values (" . $childId . ",'" . $fname . "','" . $lname . "','" . $address . "','" . $city . "','" . $bdate . "','" . $target_for_db . "','" . $group . "')";
         mysqli_query($connection, $query1);
 
         if(move_uploaded_file($_FILES['pic']['tmp_name'],$target))
