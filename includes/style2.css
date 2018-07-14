@@ -192,6 +192,41 @@ section .fa-arrow-circle-down {
      margin: 0 45%;
 }
 
+
+#kids_page .kids a{
+    float: right;
+}
+#kids_page .kids a img{
+    border-radius: 50%;
+    height: 180px;
+    width: 180px;
+    margin: 25px;
+    margin-top: 5px;
+    border: 5px solid #acacac;
+}
+
+#kids_page .kids a img.warning_msg{
+    border: 5px solid #ea1111;
+}
+#kids_page .kids a img p{
+    display: block;
+    width: 50px;
+    margin-left: 60px;
+}
+#kids_page .kids a h5{
+    text-align: center;
+    color: #00a743;
+
+}
+ #kids_page .kids a h5:hover{
+    color: #acacac;
+     font-weight: bold;
+}
+
+ #kids_page .kids #center_plus{
+     margin: 0 45%;
+}
+
 #messageAlert{
     width: 500px;
     height: 320px;

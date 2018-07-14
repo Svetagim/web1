@@ -1,3 +1,6 @@
+<?php
+    include('database/db_conf.php');
+?>
 <!DOCTYPE html>
 <html lang="he">
 <head>
@@ -63,7 +66,33 @@
                         <i class="fas fa-arrow-circle-down"></i>
                     </section>
                 </a>
+        <section class="kids">
+            <?php
+                    $query = "SELECT * FROM Childrens_213";
+                    $result = mysqli_query($connection, $query);
+                    if(!$result) {
+                        die("DB query: " + $query + " - failed.");
+                    }
+                    else{
+                        if(mysqli_num_rows($result) < 1){
+                            echo '<div class="alert alert-warning" role="alert">קבוצה ריקה מילדים</div>';
+                            echo '<a href="#" id="center_plus"><img src="images/PlusIcon_Small_Gray.png"></a>';
+                        }
+                        else{
+                            while($row = mysqli_fetch_assoc($result)) {
+                                echo '<a href="kids.php?Child_ID=' . $row["Child_ID"] . '&Cname=' . $row["FirstName"] . '"><img src="' . $row["pic"] . '"><h5>' . $row["FirstName"] . '</h5></a>';
+                            }
+                            echo '<a href="#"><img src="images/PlusIcon_Small_Gray.png"></a>';
+                        }
+                    }
+                    //Release returned data
+                    mysqli_free_result($result);
 
+                    //Close DB connection
+                    mysqli_close($connection);
+            ?>
+            
+        </section>
     </main>
 </div>
     
