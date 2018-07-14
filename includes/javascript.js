@@ -1,4 +1,4 @@
-
+/*
 window.onload=function(){
     console.log(" I'm in");
 
@@ -32,4 +32,10 @@ window.onload=function(){
         objSecond.style.display = "none";
     }
 
-}
+}*/
+
+$(document).ready(function () {
+    $.getJSON("data/groups.json",function (data) {
+        console.log(data);
+    });
+});
