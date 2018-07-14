@@ -7,7 +7,7 @@ $(document).ready(function() {
     $.getJSON("data/reminders.json", function(data) {
         var index = 1;
         $.each(data.reminders, function() {   
-            $('#modal-body').append("<div class='form-check'><input class='form-check-input' type='radio' name='reminder' id='reminder" + index + "' value='" + this.text + "' checked><label class='form-check-label'>"+this.text+"</label></div>");
+            $('#treatment_box_modal-body').append("<div class='form-check'><input class='form-check-input' type='radio' name='reminder' id='reminder" + index + "' value='" + this.text + "' checked><label class='form-check-label'>"+this.text+"</label></div>");
             index++;
         });
     });

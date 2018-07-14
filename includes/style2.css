@@ -299,3 +299,19 @@ label.form-check-label{
 #treatment_box .modal-footer button {
     margin-right: 10px;
 }
+
+#addnewchild_box .modal-header {
+    direction: rtl;
+}
+
+#addnewchild_box .modal-footer {
+    margin-right:61%;
+}
+
+#addnewchild_box .modal-footer button {
+    margin-right: 10px;
+}
+
+#addnewchild_box .modal-body {
+    direction: rtl;
+}

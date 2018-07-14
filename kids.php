@@ -130,7 +130,7 @@
         </button>
       </div>
         <form action="" method="post" autocomplete ="on" id="reminder_form">
-          <div class="modal-body" id="modal-body">
+          <div class="modal-body" id="treatment_box_modal-body">
             <p>המערכת זיהתה כי טרם הוזנה פעילות זחילה. זחילה לראשונה אמורה להתבצע בגילאי 7-9 חודשים. מומלץ לעדכן את ההורים ולהמשיך לעקוב</p>
             <p>?מה ברצונך לעשות</p>
             <!-- Here enters json data from reminders.json -->

@@ -75,14 +75,11 @@
                             while($row = mysqli_fetch_assoc($result)) {
                                 echo '<a href="kids.php?Child_ID=' . $row["Child_ID"] . '&Cname=' . $row["FirstName"] . '"><img src="' . $row["pic"] . '"><h5>' . $row["FirstName"] . '</h5></a>';
                             }
-                            echo '<a href="#"><img src="images/PlusIcon_Small_Gray.png"></a>';
+                            echo '<a href="#" data-toggle="modal" data-target="#addnewchild_box"><img src="images/PlusIcon_Small_Gray.png"></a>';
                         }
                     }
                     //Release returned data
                     mysqli_free_result($result);
-
-                    //Close DB connection
-                    mysqli_close($connection);
                 }
                 else
                 {
@@ -91,11 +88,61 @@
             ?>
             
         </section>
+            <!-- Add a new child box -->
+            <!-- Modal -->
+            <div class="modal fade" id="addnewchild_box" tabindex="-1" role="dialog" aria-labelledby="addnewchild_box" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addnewchild_boxTitle">הוספת ילד/ה חדש/ה</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                    <form action="database/imageUpload.php" enctype="multipart/form-data" method="post" autocomplete ="on" id="addchild_form" class="addchild_form">
+                      <div class="modal-body" id="modal-body">
+                        <p>בבקשה מלאו את הפריטים הבאים</p>
+                        <input type="text" class="form-control" id="fname" name="fname" placeholder="שם פרטי">
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="שם משפחה">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="כתובת מגורים">
+                        <input type="text" class="form-control" id="city" name="city" placeholder="עיר">
+                        <input type="date" class="form-control" id="bdate" name="bdate" placeholder="תאריך לידה">
+                        <select class="form-control" id="group" name="group">
+                        <?php 
+                        $query = "SELECT * FROM Groups_213";
+                        $result = mysqli_query($connection, $query);
+                        if(!$result) {
+                            die("DB query: " + $query + " - failed.");
+                        }
+                        else{
+                            while($row = mysqli_fetch_assoc($result)) {
+                                echo '<option value=' . $row['Group_ID'] . '>' . $row['name'] . '</option>';
+                            }
+                        }
+                        //Release returned data
+                        mysqli_free_result($result);
 
+                        //Close DB connection
+                        mysqli_close($connection);    
+                        
+                        ?>
+                        </select>
+                        <div class="preview"></div>
+                        <label for="pic">תמונה</label>
+                        <input type="file" class="form-control-file" id="pic" name="pic">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ביטול</button>
+                        <input type="submit" class="btn btn-success" value="אישור">
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+            <!-- END Treatment box -->
     </main>
-
-</div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
 <script src="includes/javascript.js"></script>
